@@ -110,3 +110,6 @@ tmp/
 **/.DS_Store
 data
 data/
+
+# Pycharm
+.idea/
