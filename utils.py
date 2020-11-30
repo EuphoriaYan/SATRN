@@ -344,7 +344,7 @@ def load_charset(charset_path):
         if ext == '.pkl' or ext == '.cp':
             charset = cp.load(open(charset_path, 'rb'))
         else:
-            charset = open(charset_path, 'r', encoding='utf8').readline()
+            charset = ''.join([s.strip() for s in open(charset_path, 'r', encoding='utf8').readlines()])
 
     elif charset_path == 'alphanumeric':
         charset = \

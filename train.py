@@ -159,7 +159,7 @@ def main(config_file):
     tower_batch_size = batch_size // num_gpus
 
     val_tower_outputs = []
-    eval_tower_outputs = []
+    # eval_tower_outputs = []
 
     for gpu_indx in range(num_gpus):
 

@@ -1,5 +1,5 @@
 network: "SATRN"
-charset: "./resources/charset.txt"
+charset: "./resources/charset_xl.txt"
 resize_hw:
   height: 32
   width: 100
