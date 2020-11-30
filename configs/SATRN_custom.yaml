@@ -23,7 +23,7 @@ train:
     - 1.0
   lowercase: False
   alphanumeric: False
-  batch_size: 256
+  batch_size: 64
   num_threads: 8
   tune_from: ""
   max_num_steps: 250001
