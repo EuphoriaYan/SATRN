@@ -6,7 +6,7 @@ resize_hw:
 use_rgb: False
 label_maxlen: 25
 seed: 42
-model_dir: "../saved_models/satrn"
+model_dir: "./saved_models/satrn"
 
 hidden_size: 512
 filter_size: 2048
@@ -18,9 +18,9 @@ rot_stddev: 0.6
 
 train:
   dataset_paths:
-      - "../data/train/MJS90/mjsynth_*_case-words-*.tfrecord"     # 9M   mjsynth train+valid+test
-      - "../data/train/MJS90/synth90_alpha_case-words-*.tfrecord" # 5.5M synthtext without special symbol
-      - "../data/train/MJS90/synth90_spe_case-words-*.tfrecord"   # 1.5M synthtext with special symbol
+      - "./data/train/MJS90/mjsynth_*_case-words-*.tfrecord"     # 9M   mjsynth train+valid+test
+      - "./data/train/MJS90/synth90_alpha_case-words-*.tfrecord" # 5.5M synthtext without special symbol
+      - "./data/train/MJS90/synth90_spe_case-words-*.tfrecord"   # 1.5M synthtext with special symbol
   dataset_portions:
     - 0.5
     - 0.375
@@ -36,7 +36,7 @@ train:
   summary_steps: 1000
   optimizer:
     optimizer: 'Adam'
-    learning_rate: 0.0003
+    learning_rate: 3e-4
     beta2: 0.999
     use_clr: True
     clr_step: 250000
@@ -44,13 +44,13 @@ train:
 
 valid:
   dataset_paths:
-      - "../data/test/cute80/gt.txt"
-      - "../data/test/icdar03/gt.txt"
-      - "../data/test/icdar13/gt.txt"
-      - "../data/test/icdar15/gt.txt"
-      - "../data/test/iiit5k/gt.txt"
-      - "../data/test/svt/gt.txt"
-      - "../data/test/svtp/gt.txt"
+      - "./data/test/cute80/gt.txt"
+      - "./data/test/icdar03/gt.txt"
+      - "./data/test/icdar13/gt.txt"
+      - "./data/test/icdar15/gt.txt"
+      - "./data/test/iiit5k/gt.txt"
+      - "./data/test/svt/gt.txt"
+      - "./data/test/svtp/gt.txt"
   lowercase: True
   alphanumeric: True
   batch_size: 256
@@ -58,13 +58,13 @@ valid:
 
 eval:
   dataset_paths: 
-      - "../data/test/cute80/gt.txt"
-      - "../data/test/icdar03/gt.txt"
-      - "../data/test/icdar13/gt.txt"
-      - "../data/test/icdar15/gt.txt"
-      - "../data/test/iiit5k/gt.txt"
-      - "../data/test/svt/gt.txt"
-      - "../data/test/svtp/gt.txt"
+      - "./data/test/cute80/gt.txt"
+      - "./data/test/icdar03/gt.txt"
+      - "./data/test/icdar13/gt.txt"
+      - "./data/test/icdar15/gt.txt"
+      - "./data/test/iiit5k/gt.txt"
+      - "./data/test/svt/gt.txt"
+      - "./data/test/svtp/gt.txt"
   lowercase: True
   alphanumeric: True
   model_path: "../saved_models/satrn/model"

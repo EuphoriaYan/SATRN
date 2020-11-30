@@ -39,11 +39,12 @@ def gen_data(gt_exp,
 
     # Prepare stuff
     num_shards = (len(img_filenames) - 1) // images_per_shard + 1
-    num_digits = math.ceil(math.log10(num_shards - 1)) \
-        if num_shards != 1 \
-        else 1
+    if num_shards == 1:
+        num_digits = 1
+    else:
+        num_digits = math.ceil(math.log10(num_shards - 1))
     shard_format = '%0' + ('%d' % num_digits) + 'd'
-    num_of_data = 0
+    # num_of_data = 0
     os.makedirs(output_dir, exist_ok=True)
 
     # Multiprocessing
