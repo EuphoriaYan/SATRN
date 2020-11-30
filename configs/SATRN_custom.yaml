@@ -18,13 +18,9 @@ rot_stddev: 0.6
 
 train:
   dataset_paths:
-      - "./data/train/MJS90/mjsynth_*_case-words-*.tfrecord"     # 9M   mjsynth train+valid+test
-      - "./data/train/MJS90/synth90_alpha_case-words-*.tfrecord" # 5.5M synthtext without special symbol
-      - "./data/train/MJS90/synth90_spe_case-words-*.tfrecord"   # 1.5M synthtext with special symbol
+      - "./data/train/fakepages/leishu_songhei_2w-words-*.tfrecord"
   dataset_portions:
-    - 0.5
-    - 0.375
-    - 0.125
+    - 1.0
   lowercase: False
   alphanumeric: False
   batch_size: 256
@@ -44,13 +40,7 @@ train:
 
 valid:
   dataset_paths:
-      - "./data/test/cute80/gt.txt"
-      - "./data/test/icdar03/gt.txt"
-      - "./data/test/icdar13/gt.txt"
-      - "./data/test/icdar15/gt.txt"
-      - "./data/test/iiit5k/gt.txt"
-      - "./data/test/svt/gt.txt"
-      - "./data/test/svtp/gt.txt"
+      - "/home/euphoria/Chinese-ancient-book-recognition-HSK/data/book_pages_val_songhei2w/gt_file.txt"
   lowercase: True
   alphanumeric: True
   batch_size: 256
@@ -58,16 +48,10 @@ valid:
 
 eval:
   dataset_paths: 
-      - "./data/test/cute80/gt.txt"
-      - "./data/test/icdar03/gt.txt"
-      - "./data/test/icdar13/gt.txt"
-      - "./data/test/icdar15/gt.txt"
-      - "./data/test/iiit5k/gt.txt"
-      - "./data/test/svt/gt.txt"
-      - "./data/test/svtp/gt.txt"
+      - "/home/euphoria/Chinese-ancient-book-recognition-HSK/data/book_pages_val_songhei2w/gt_file.txt"
   lowercase: True
   alphanumeric: True
-  model_path: "../saved_models/satrn/model"
+  model_path: "./saved_models/satrn/model"
   batch_size: 256
   verbose: False
 
