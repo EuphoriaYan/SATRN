@@ -18,7 +18,7 @@ rot_stddev: 0.6
 
 train:
   dataset_paths:
-      - "./data/train/fakepages/leishu_songhei_2w-words-*.tfrecord"
+      - "./data/train/fakepages/leishu_songhei_2w/leishu_songhei_2w-words-*.tfrecord"
   dataset_portions:
     - 1.0
   lowercase: False
