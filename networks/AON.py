@@ -9,7 +9,7 @@ import math
 import tensorflow as tf
 
 from networks.layers import \
-        rnn_layer, attention_decoder, conv_layer, pool_layer, ConvParams
+    rnn_layer, attention_decoder, conv_layer, pool_layer, ConvParams
 from networks.Network import Network
 
 
@@ -22,7 +22,7 @@ class AON(Network):
 
         # Set Default Settings
         self.loss_fn = 'cross_ent'
-        self.rnn_size = 2**8
+        self.rnn_size = 2 ** 8
 
     def preprocess_image(self, image, is_train=True):
         """
@@ -207,8 +207,8 @@ class AON(Network):
             hfeatures = self._shared_cnn(inputs, is_train, reuse=False)
             vfeatures = self._shared_cnn(tf.contrib.image.rotate(
                 inputs, math.pi / 2),
-                                         is_train,
-                                         reuse=True)
+                is_train,
+                reuse=True)
 
             hfeatures = tf.transpose(hfeatures,
                                      perm=[1, 0, 2],

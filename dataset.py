@@ -61,11 +61,11 @@ class DatasetLodaer(object):
 
         if self.dataset_portions is not None:
             assert -1e-9 < abs(1. - sum(self.dataset_portions)) < 1e-9, \
-                    str(sum(self.dataset_portions))
+                str(sum(self.dataset_portions))
             assert len(self.dataset_paths) == len(self.dataset_portions)
         else:
             assert not concat_batch, \
-                    'Data portions must be specified for concat_batch'
+                'Data portions must be specified for concat_batch'
             self.dataset_portions = [1 for _ in range(len(self.dataset_paths))]
 
         _, ext = os.path.splitext(
@@ -213,8 +213,8 @@ class DatasetLodaer(object):
             # Extract
             if self.concat_batch:
                 _batch_size = max(int(self.batch_size * ds_portion), 1) \
-                        if i < len(self.dataset_names)-1 \
-                        else max(self.batch_size - sum(batch_sizes), 1)
+                    if i < len(self.dataset_names) - 1 \
+                    else max(self.batch_size - sum(batch_sizes), 1)
                 batch_sizes.append(_batch_size)
 
             else:
@@ -234,7 +234,7 @@ class DatasetLodaer(object):
             if self.shuffle_and_repeat:
                 _dataset = _dataset.apply(
                     tf.contrib.data.shuffle_and_repeat(buffer_size=_batch_size *
-                                                       self.buffer_size,
+                                                                   self.buffer_size,
                                                        seed=self.seed))
 
             # Trasform

@@ -8,7 +8,7 @@ MIT license
 import tensorflow as tf
 
 from networks.layers import \
-        rnn_layers, conv_layer, pool_layer, norm_layer, dense_layer, ConvParams
+    rnn_layers, conv_layer, pool_layer, norm_layer, dense_layer, ConvParams
 from networks.Network import Network
 
 
@@ -22,7 +22,7 @@ class GRCNN(Network):
         # Set loss function
         self.loss_fn = 'ctc_loss'
 
-        self.rnn_size = self.FLAGS.rnn_size or 2**8
+        self.rnn_size = self.FLAGS.rnn_size or 2 ** 8
 
     def preprocess_image(self, image, is_train=True):
         """
@@ -38,7 +38,6 @@ class GRCNN(Network):
         return image
 
     def get_logits(self, image, is_train, **kwargs):
-
         widths = tf.ones(tf.shape(image)[0],
                          dtype=tf.int32) * tf.shape(image)[2]
         features, sequence_length = self._convnet_layers(

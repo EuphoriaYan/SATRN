@@ -8,8 +8,8 @@ MIT license
 import tensorflow as tf
 
 from networks.layers import \
-        rnn_layers, attention_decoder, conv_layer, \
-        pool_layer, dense_layer, ConvParams
+    rnn_layers, attention_decoder, conv_layer, \
+    pool_layer, dense_layer, ConvParams
 from networks.Network import Network
 
 
@@ -22,7 +22,7 @@ class RARE(Network):
 
         # Set loss function
         self.loss_fn = 'cross_ent'
-        self.rnn_size = 2**8
+        self.rnn_size = 2 ** 8
 
     def preprocess_image(self, image, is_train=True):
         """

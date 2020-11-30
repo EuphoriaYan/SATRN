@@ -8,8 +8,8 @@ MIT license
 import tensorflow as tf
 
 from networks.layers import \
-        conv_layer, pool_layer, residual_block, \
-        dense_layer, ConvParams, rnn_layer
+    conv_layer, pool_layer, residual_block, \
+    dense_layer, ConvParams, rnn_layer
 from networks.Network import Network
 
 
@@ -22,7 +22,7 @@ class SAR(Network):
 
         # Set Default Settings
         self.loss_fn = 'cross_ent'
-        self.rnn_size = 2**8
+        self.rnn_size = 2 ** 8
 
     def preprocess_image(self, image, is_train=True):
         """
@@ -116,28 +116,28 @@ class SAR(Network):
         """
         conv_params = \
             [  # conv1_x
-             ConvParams(64, 3, (1, 1), 'same', False, True, 'conv1_1'),
-             ConvParams(128, 3, (1, 1), 'same', False, True, 'conv1_2'),
-             # conv2_x
-             ConvParams(256, 1, (1, 1), 'same', False, True, 'conv2_1'),
-             ConvParams(256, 3, (1, 1), 'same', False, True, 'resd2_1'),
-             ConvParams(256, 3, (1, 1), 'same', False, True, 'resd2_2'),
-             ConvParams(256, 3, (1, 1), 'same', False, True, 'conv2_2'),
-             # conv3_x
-             ConvParams(256, 1, (1, 1), 'same', False, True, 'conv3_1'),
-             ConvParams(256, 3, (1, 1), 'same', False, True, 'resd3_1'),
-             ConvParams(256, 3, (1, 1), 'same', False, True, 'resd3_2'),
-             ConvParams(256, 3, (1, 1), 'same', False, True, 'conv3_2'),
-             # conv4_x
-             ConvParams(512, 1, (1, 1), 'same', False, True, 'conv4_1'),
-             ConvParams(512, 3, (1, 1), 'same', False, True, 'resd4_1'),
-             ConvParams(512, 3, (1, 1), 'same', False, True, 'resd4_2'),
-             ConvParams(512, 3, (1, 1), 'same', False, True, 'conv4_2'),
-             # conv5_x
-             ConvParams(512, 1, (1, 1), 'same', False, True, 'conv5_1'),
-             ConvParams(512, 3, (1, 1), 'same', False, True, 'resd5_1'),
-             ConvParams(512, 3, (1, 1), 'same', False, True, 'resd5_2'),
-             ConvParams(512, 3, (1, 1), 'same', False, True, 'conv5_2')]
+                ConvParams(64, 3, (1, 1), 'same', False, True, 'conv1_1'),
+                ConvParams(128, 3, (1, 1), 'same', False, True, 'conv1_2'),
+                # conv2_x
+                ConvParams(256, 1, (1, 1), 'same', False, True, 'conv2_1'),
+                ConvParams(256, 3, (1, 1), 'same', False, True, 'resd2_1'),
+                ConvParams(256, 3, (1, 1), 'same', False, True, 'resd2_2'),
+                ConvParams(256, 3, (1, 1), 'same', False, True, 'conv2_2'),
+                # conv3_x
+                ConvParams(256, 1, (1, 1), 'same', False, True, 'conv3_1'),
+                ConvParams(256, 3, (1, 1), 'same', False, True, 'resd3_1'),
+                ConvParams(256, 3, (1, 1), 'same', False, True, 'resd3_2'),
+                ConvParams(256, 3, (1, 1), 'same', False, True, 'conv3_2'),
+                # conv4_x
+                ConvParams(512, 1, (1, 1), 'same', False, True, 'conv4_1'),
+                ConvParams(512, 3, (1, 1), 'same', False, True, 'resd4_1'),
+                ConvParams(512, 3, (1, 1), 'same', False, True, 'resd4_2'),
+                ConvParams(512, 3, (1, 1), 'same', False, True, 'conv4_2'),
+                # conv5_x
+                ConvParams(512, 1, (1, 1), 'same', False, True, 'conv5_1'),
+                ConvParams(512, 3, (1, 1), 'same', False, True, 'resd5_1'),
+                ConvParams(512, 3, (1, 1), 'same', False, True, 'resd5_2'),
+                ConvParams(512, 3, (1, 1), 'same', False, True, 'conv5_2')]
 
         with tf.variable_scope("convnet"):
             conv1 = conv_layer(inputs, conv_params[0], is_train)

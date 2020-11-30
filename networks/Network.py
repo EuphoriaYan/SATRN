@@ -40,16 +40,16 @@ class Network(abc.ABC):
         """
         if self.loss_fn == 'cross_ent':
             tvars, loss, extra_update_ops = \
-                    self._get_cross_entropy(logits,
-                                            label,
-                                            kwargs['label_length'],
-                                            kwargs['label_maxlen'])
+                self._get_cross_entropy(logits,
+                                        label,
+                                        kwargs['label_length'],
+                                        kwargs['label_maxlen'])
 
         elif self.loss_fn == 'ctc_loss':
             tvars, loss, extra_update_ops = \
-                    self._get_ctc_loss(logits,
-                                       label,
-                                       kwargs['sequence_length'])
+                self._get_ctc_loss(logits,
+                                   label,
+                                   kwargs['sequence_length'])
 
         else:
             raise NotImplementedError

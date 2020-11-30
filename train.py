@@ -21,10 +21,10 @@ from flags import Flags
 from constant import DELIMITER
 from dataset import DatasetLodaer
 from utils import \
-        load_charset, get_optimizer, \
-        get_network, get_session_config, get_string, \
-        adjust_string, count_available_gpus, \
-        single_tower, validate, get_session, get_scaffold, get_init_trained
+    load_charset, get_optimizer, \
+    get_network, get_session_config, get_string, \
+    adjust_string, count_available_gpus, \
+    single_tower, validate, get_session, get_scaffold, get_init_trained
 
 tf.logging.set_verbosity(tf.logging.ERROR)
 
@@ -136,7 +136,7 @@ def main(config_file):
     # Print system environments
     num_gpus = count_available_gpus()
     num_cpus = os.cpu_count()
-    mem_size = virtual_memory().available // (1024**3)
+    mem_size = virtual_memory().available // (1024 ** 3)
     log_formatted(logger, '[+] System environments',
                   'The number of gpus : {}'.format(num_gpus),
                   'The number of cpus : {}'.format(num_cpus),
@@ -168,8 +168,8 @@ def main(config_file):
         input_device = '/gpu:%d' % gpu_indx
 
         tower_batch_size = tower_batch_size \
-            if gpu_indx < num_gpus-1 \
-            else batch_size - tower_batch_size * (num_gpus-1)
+            if gpu_indx < num_gpus - 1 \
+            else batch_size - tower_batch_size * (num_gpus - 1)
 
         train_loader = DatasetLodaer(
             dataset_paths=FLAGS.train.dataset_paths,
@@ -213,7 +213,7 @@ def main(config_file):
         valid_loader = DatasetLodaer(dataset_paths=FLAGS.valid.dataset_paths,
                                      dataset_portions=None,
                                      batch_size=FLAGS.valid.batch_size //
-                                     num_gpus,
+                                                num_gpus,
                                      label_maxlen=FLAGS.label_maxlen,
                                      out_charset=out_charset,
                                      preprocess_image=net.preprocess_image,
@@ -266,7 +266,7 @@ def main(config_file):
         [s for s in summaries if 'valid' in s.name])
     val_summary_writer = {
         dataset_name:
-        tf.summary.FileWriter(os.path.join(model_dir, 'valid', dataset_name))
+            tf.summary.FileWriter(os.path.join(model_dir, 'valid', dataset_name))
         for dataset_name in valid_loader.dataset_names
     }
     val_summary_writer['total_valid'] = tf.summary.FileWriter(
@@ -357,23 +357,23 @@ def main(config_file):
                     best_step = best_steps[dataset]
 
                     s = '%s : %.2f%%(%d/%d)\tBEST_STEP : %d' % \
-                        (dataset, (1.-err_rate)*100, cnt-err, cnt, best_step)
+                        (dataset, (1. - err_rate) * 100, cnt - err, cnt, best_step)
 
                     log_strings.append(s)
 
                 elapsed_t = float(time.time() - start_t) / 60
-                remain_t = (elapsed_t / (_step+1)) * \
-                    (FLAGS.train.max_num_steps - _step - 1)
+                remain_t = (elapsed_t / (_step + 1)) * \
+                           (FLAGS.train.max_num_steps - _step - 1)
                 log_formatted(
                     logger, 'STEP : %d\tTRAIN_LOSS : %f' % (_step, step_loss),
-                    'ELAPSED : %.2f min\tREMAIN : %.2f min\t'
-                    'STEP_TIME: %.1f sec' %
-                    (elapsed_t, remain_t, float(train_t) / (_step + 1)),
-                    'TRAIN_SEQ_ERR : %f\tVALID_SEQ_ERR : %f' %
-                    (train_err_rate, val_err_rates['total_valid']),
-                    'BEST_STEP : %d\tBEST_VALID_SEQ_ERR : %f' %
-                    (best_steps['total_valid'],
-                     best_val_err_rates['total_valid']), *log_strings)
+                            'ELAPSED : %.2f min\tREMAIN : %.2f min\t'
+                            'STEP_TIME: %.1f sec' %
+                            (elapsed_t, remain_t, float(train_t) / (_step + 1)),
+                            'TRAIN_SEQ_ERR : %f\tVALID_SEQ_ERR : %f' %
+                            (train_err_rate, val_err_rates['total_valid']),
+                            'BEST_STEP : %d\tBEST_VALID_SEQ_ERR : %f' %
+                            (best_steps['total_valid'],
+                             best_val_err_rates['total_valid']), *log_strings)
 
         log_formatted(logger, 'Training is completed!')
 

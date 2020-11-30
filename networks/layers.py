@@ -300,7 +300,6 @@ def _attention_decoder(decoder_inputs,
                        dtype=None,
                        scope=None,
                        initial_state_attention=False):
-
     from tensorflow.contrib.rnn.python.ops import core_rnn_cell
     from tensorflow.python.framework import dtypes
     from tensorflow.python.ops import array_ops
@@ -454,4 +453,3 @@ def _attention_decoder(decoder_inputs,
     attn_weights = tf.stack(attn_weights, axis=1)
 
     return outputs, state, attn_weights
-

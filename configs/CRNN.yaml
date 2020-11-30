@@ -10,9 +10,9 @@ seed: 42
 
 train:
   dataset_paths:
-      - "/mnt/cnsmlssd001/public/junyeop-lee/data/ICCV/train/MJS90/mjsynth_*_case-words-*.tfrecord"     # 9M   mjsynth train+valid+test
-      - "/mnt/cnsmlssd001/public/junyeop-lee/data/ICCV/train/MJS90/synth90_alpha_case-words-*.tfrecord" # 5.5M synthtext without special symbol
-      - "/mnt/cnsmlssd001/public/junyeop-lee/data/ICCV/train/MJS90/synth90_spe_case-words-*.tfrecord"   # 1.5M synthtext with special symbol
+    - "/mnt/cnsmlssd001/public/junyeop-lee/data/ICCV/train/MJS90/mjsynth_*_case-words-*.tfrecord"     # 9M   mjsynth train+valid+test
+    - "/mnt/cnsmlssd001/public/junyeop-lee/data/ICCV/train/MJS90/synth90_alpha_case-words-*.tfrecord" # 5.5M synthtext without special symbol
+    - "/mnt/cnsmlssd001/public/junyeop-lee/data/ICCV/train/MJS90/synth90_spe_case-words-*.tfrecord"   # 1.5M synthtext with special symbol
   dataset_portions:
     - 0.5
     - 0.375
@@ -34,16 +34,16 @@ train:
 
 valid:
   dataset_paths:
-      - "/mnt/cnsmlssd001/public/junyeop-lee/data/ICCV/test/**/gt.txt"
+    - "/mnt/cnsmlssd001/public/junyeop-lee/data/ICCV/test/**/gt.txt"
   lowercase: True
   alphanumeric: True
   batch_size: 256
   steps: 1000
 
 eval:
-  dataset_paths: 
-      - "/mnt/cnsmlssd001/public/junyeop-lee/data/ICCV/test/cute80/gt.txt"
-      - "/mnt/cnsmlssd001/public/junyeop-lee/data/ICCV/test/icdar13/gt.txt"
+  dataset_paths:
+    - "/mnt/cnsmlssd001/public/junyeop-lee/data/ICCV/test/cute80/gt.txt"
+    - "/mnt/cnsmlssd001/public/junyeop-lee/data/ICCV/test/icdar13/gt.txt"
   lowercase: True
   alphanumeric: True
   model_path: "./default/best_models/total_valid"

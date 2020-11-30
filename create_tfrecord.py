@@ -54,8 +54,8 @@ def gen_data(gt_exp,
     with ProcessPoolExecutor(max_workers=num_processes) as executor:
         for pid in range(num_processes):
             start_shard = shards_per_process * pid
-            end_shard = shards_per_process * (pid+1) \
-                if pid != num_processes-1 \
+            end_shard = shards_per_process * (pid + 1) \
+                if pid != num_processes - 1 \
                 else num_shards
             _num_shards = end_shard - start_shard
             start_example = start_shard * images_per_shard
@@ -90,9 +90,9 @@ def process_fn(process_id, start_shard, num_shards, image_filenames, texts,
     for i in range(num_shards):
         start = images_per_shard * i
         end = images_per_shard * (i + 1)
-        out_filename = dataset_name+'-words-' + \
-            (shard_format % (i+start_shard)) + \
-            '.tfrecord'
+        out_filename = dataset_name + '-words-' + \
+                       (shard_format % (i + start_shard)) + \
+                       '.tfrecord'
         out_filename = os.path.join(output_dir, out_filename)
 
         if os.path.isfile(out_filename):

@@ -13,12 +13,12 @@ filter_size: 2048
 enc_layers: 12
 dec_layers: 6
 num_heads: 8
-dropout_rate: 0.9 
+dropout_rate: 0.9
 rot_stddev: 0.6
 
 train:
   dataset_paths:
-      - "./data/train/fakepages/leishu_songhei_2w/leishu_songhei_2w-words-*.tfrecord"
+    - "./data/train/fakepages/leishu_songhei_2w/leishu_songhei_2w-words-*.tfrecord"
   dataset_portions:
     - 1.0
   lowercase: False
@@ -40,15 +40,15 @@ train:
 
 valid:
   dataset_paths:
-      - "/home/euphoria/Chinese-ancient-book-recognition-HSK/data/book_pages_val_songhei2w/gt_file.txt"
+    - "/home/euphoria/Chinese-ancient-book-recognition-HSK/data/book_pages_val_songhei2w/gt_file.txt"
   lowercase: True
   alphanumeric: True
   batch_size: 256
   steps: 1000
 
 eval:
-  dataset_paths: 
-      - "/home/euphoria/Chinese-ancient-book-recognition-HSK/data/book_pages_val_songhei2w/gt_file.txt"
+  dataset_paths:
+    - "/home/euphoria/Chinese-ancient-book-recognition-HSK/data/book_pages_val_songhei2w/gt_file.txt"
   lowercase: True
   alphanumeric: True
   model_path: "./saved_models/satrn/model"

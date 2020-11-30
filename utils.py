@@ -154,7 +154,6 @@ def validate(sess,
                 if val_saver is not None:
                     if dataset not in best_val_err_rates.keys() or \
                             val_err_rate < best_val_err_rates[dataset]:
-
                         best_val_err_rates[dataset] = val_err_rate
 
                         val_saver.save(get_session(sess),
@@ -174,9 +173,8 @@ def single_tower(net, gpu_indx, dataset_loader, out_charset, optimizer, name,
     """
     # Get batch
     with tf.device('/gpu:%d' % gpu_indx), \
-            tf.variable_scope(tf.get_variable_scope(), reuse=tf.AUTO_REUSE), \
-            tf.name_scope(name):
-
+         tf.variable_scope(tf.get_variable_scope(), reuse=tf.AUTO_REUSE), \
+         tf.name_scope(name):
         batch = dataset_loader.get_batch()
 
         # Tensorboard image
@@ -194,8 +192,8 @@ def single_tower(net, gpu_indx, dataset_loader, out_charset, optimizer, name,
             label_maxlen=dataset_loader.label_maxlen)
 
         grads = optimizer.compute_gradients(
-                loss, tvars,
-                colocate_gradients_with_ops=True) \
+            loss, tvars,
+            colocate_gradients_with_ops=True) \
             if optimizer is not None \
             else None
 
@@ -273,9 +271,9 @@ def get_labels(text, out_charset):
     """ Transform text to sequence of integer.
     """
     labels = [
-        out_charset.index(c) if c in list(out_charset) else UNK_INDEX
-        for c in list(text)
-    ] + [EOS_INDEX]
+                 out_charset.index(c) if c in list(out_charset) else UNK_INDEX
+                 for c in list(text)
+             ] + [EOS_INDEX]
 
     return labels
 
@@ -400,7 +398,6 @@ def cyclic_learning_rate(global_step,
         iteration = tf.mod(_global_step, step_size)
 
         def cyclic_lr():
-
             def _end_fn():
                 cut = (iteration - 2 * cycle_step) / (step_size -
                                                       2 * cycle_step)
@@ -457,7 +454,7 @@ def get_optimizer(optimizer_config, global_step):
 
     elif optimizer_config.optimizer == 'GradDesc':
         optimizer = \
-                tf.train.GradientDescentOptimizer(learning_rate=learning_rate)
+            tf.train.GradientDescentOptimizer(learning_rate=learning_rate)
 
     else:
         raise NotImplementedError

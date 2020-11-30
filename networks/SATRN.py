@@ -6,7 +6,7 @@ import math
 import tensorflow as tf
 
 from networks.layers import \
-        conv_layer, pool_layer, dense_layer, ConvParams, norm_layer
+    conv_layer, pool_layer, dense_layer, ConvParams, norm_layer
 from networks.Network import Network
 
 
@@ -101,8 +101,7 @@ class SATRN(Network):
         if is_train:
             h, w, _ = image.get_shape()
             up_pad = tf.concat([image[0:1, :, :] for _ in range(2 * h)], axis=0)
-            down_pad = tf.concat([image[-1:, :, :] for _ in range(2 * h)],
-                                 axis=0)
+            down_pad = tf.concat([image[-1:, :, :] for _ in range(2 * h)], axis=0)
             image = tf.concat([up_pad, image], axis=0)
             image = tf.concat([image, down_pad], axis=0)
 
@@ -152,9 +151,9 @@ class SATRN(Network):
                                                        is_train)
         else:
             logits, decoded_ids, weights = \
-                    self.transformer_predictor(features,
-                                               is_train,
-                                               self.label_maxlen)
+                self.transformer_predictor(features,
+                                           is_train,
+                                           self.label_maxlen)
 
         logits = tf.reshape(logits,
                             [-1, self.label_maxlen,
@@ -167,7 +166,7 @@ class SATRN(Network):
         """
         """
         conv_params = \
-            [ConvParams(self.hidden_size//2, 3,
+            [ConvParams(self.hidden_size // 2, 3,
                         (1, 1), 'same', False, True, 'conv1'),
              ConvParams(self.hidden_size, 3,
                         (1, 1), 'same', False, True, 'conv2')]
@@ -225,7 +224,7 @@ class SATRN(Network):
                                 activation=tf.nn.sigmoid)
             alpha = tf.reshape(alpha, [-1, 2, 1, hidden_size])
             pos_encoding = alpha[:, 0:1, :, :] * h_encoding \
-                + alpha[:, 1:2, :, :] * w_encoding
+                           + alpha[:, 1:2, :, :] * w_encoding
 
             features += pos_encoding
             self.hw = tf.reduce_sum(alpha, axis=[2, 3])
@@ -266,13 +265,11 @@ class SATRN(Network):
                         # cnn
                         y = tf.reshape(features, shape)
 
-                        conv_params = \
-                            [ConvParams(self.filter_size, 1, (1, 1),
-                                        'same', False, True, 'expand'),
-                             ConvParams(self.filter_size, 3, (1, 1),
-                                        'same', False, True, 'dwconv'),
-                             ConvParams(self.hidden_size, 1, (1, 1),
-                                        'same', False, True, 'reduce')]
+                        conv_params = [
+                            ConvParams(self.filter_size, 1, (1, 1), 'same', False, True, 'expand'),
+                            ConvParams(self.filter_size, 3, (1, 1), 'same', False, True, 'dwconv'),
+                            ConvParams(self.hidden_size, 1, (1, 1), 'same', False, True, 'reduce')
+                        ]
                         y = conv_layer(y, conv_params[0], is_train)
                         y = depthwise_conv_layer(y, conv_params[1], is_train)
                         y = conv_layer(y, conv_params[2], is_train)
@@ -488,7 +485,7 @@ class SATRN(Network):
         # Scale q to prevent the dot product
         # between q and k from growing too large.
         depth = (hidden_size // self.num_heads)
-        q *= depth**-0.5
+        q *= depth ** -0.5
 
         # Calculate dot product attention
         logits = tf.matmul(q, k, transpose_b=True)
@@ -560,15 +557,15 @@ class SATRN(Network):
         position = tf.to_float(tf.range(length))
         num_timescales = hidden_size // 2
         log_timescale_increment = (
-            math.log(float(max_timescale) / float(min_timescale)) /
-            (tf.to_float(num_timescales) - 1))
+                math.log(float(max_timescale) / float(min_timescale)) /
+                (tf.to_float(num_timescales) - 1))
         inv_timescales = \
             min_timescale * \
             tf.exp(tf.to_float(tf.range(num_timescales))
                    * -log_timescale_increment)
 
         scaled_time = tf.expand_dims(position, 1) * \
-            tf.expand_dims(inv_timescales, 0)
+                      tf.expand_dims(inv_timescales, 0)
         signal = tf.concat([tf.sin(scaled_time), tf.cos(scaled_time)], axis=1)
 
         return signal
@@ -592,10 +589,10 @@ class SATRN(Network):
             shared_weights = tf.get_variable(
                 "weights", [num_classes + 1, self.hidden_size],
                 initializer=tf.random_normal_initializer(
-                    0., self.hidden_size**-0.5))
+                    0., self.hidden_size ** -0.5))
             embeddings = tf.gather(shared_weights, x)
             embeddings *= tf.expand_dims(mask, -1)
-            embeddings *= self.hidden_size**0.5
+            embeddings *= self.hidden_size ** 0.5
 
             return embeddings
 
@@ -607,7 +604,7 @@ class SATRN(Network):
             shared_weights = tf.get_variable(
                 "weights", [num_classes + 1, self.hidden_size],
                 initializer=tf.random_normal_initializer(
-                    0., self.hidden_size**-0.5))
+                    0., self.hidden_size ** -0.5))
             length = tf.shape(x)[1]
             x = tf.reshape(x, [-1, self.hidden_size])
             logits = tf.matmul(x, shared_weights, transpose_b=True)
