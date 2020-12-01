@@ -41,16 +41,16 @@ train:
 valid:
   dataset_paths:
     - "/home/euphoria/Chinese-ancient-book-recognition-HSK/data/book_pages_val_songhei2w/gt_file.txt"
-  lowercase: True
-  alphanumeric: True
+  lowercase: False
+  alphanumeric: False
   batch_size: 256
   steps: 1000
 
 eval:
   dataset_paths:
     - "/home/euphoria/Chinese-ancient-book-recognition-HSK/data/book_pages_val_songhei2w/gt_file.txt"
-  lowercase: True
-  alphanumeric: True
+  lowercase: False
+  alphanumeric: False
   model_path: "./saved_models/satrn/model"
   batch_size: 256
   verbose: False

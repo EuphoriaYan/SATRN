@@ -345,8 +345,7 @@ def load_charset(charset_path):
             charset = ''.join([s.strip() for s in open(charset_path, 'r', encoding='utf8').readlines()])
 
     elif charset_path == 'alphanumeric':
-        charset = \
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
     elif charset_path == 'alphanumeric_lower':
         charset = "abcdefghijklmnopqrstuvwxyz0123456789"
